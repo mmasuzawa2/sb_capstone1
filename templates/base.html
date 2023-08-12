@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="static/style.css" />
+    <title>App</title>
+  </head>
+  <body>
+
+    <nav class="navbar">
+      <div class="logo_item">
+        EventCalendar<a href="/"><i class="bx bx-home-smile"></i></a>
+        <img src="static/tm_logo.png" class="tm_logo">
+        <form action="/search" name="evtForm">
+          <input id="evtSearch" size="40" name="evt_search" placeholder = "search for artists,venues,events.."/>
+          <input id="locSearch" size="40" name="loc_search" type="text" placeholder="look up by zipcode or city" />
+          <button type="submit" id="tm-search-btn"><i class="bx bx-search"></i></button>
+        </form>
+      </div>
+
+      <div class="navbar_content">
+        <div class="dropdown">
+          <div class="userdisplay">
+            {% block userdisplay %}
+            {% endblock %}
+            <div class="dropdown-content">
+              <a href="/logout">Log out</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      {% block container %}
+      {% endblock %}
+    </div>
+
+    <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_qs894FIEL1jXEaYZNBqOlFUxpvWqK6M&libraries=places&callback=autoComplete&v=weekly"
+    defer
+  ></script>
+
+    
+  </body>
+  <script src="https://unpkg.com/axios/dist/axios.js"></script>
+  <script src="static/place_search.js"></script>
+  <script src="static/script.js"></script>
+</html>

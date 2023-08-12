@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+
+{% block container %}   
+
+    <div class="tmevent-container">
+    {% for e in data %}
+            <form action="add_tm_event" method="POST">
+                {{e["name"]}}<br>
+                <a class="event_img" href="{{e['url']}}">link to event</a><br>
+                {{e["dates"]["start"]["localDate"]}} &nbsp; {{e["dates"]["start"]["localTime"]}}<br>
+                Location:{{e["_embedded"]["venues"][0]["name"]}}<br>
+                <input type="hidden" name="event_name" value="{{e['name']}}"/>
+                <input type="hidden" name="event_date" value="{{e['dates']['start']['localDate']}}"/>
+                <input type="hidden" name="event_time_from" value="{{e['dates']['start']['localTime']}}"/>
+                <button type="submit">add event to your calendar</button>
+            </form>
+    
+    {% endfor %}
+    </div>
+
+
+
+{% endblock %}

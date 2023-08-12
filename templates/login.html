@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="static/style.css" />
+</head>
+<body background="static/DALL-E_bg.png">
+
+
+    <div class="form-main">  
+      
+
+      <input type="checkbox" id="chk" aria-hidden="true">
+        <div class="signup">
+          <form method="POST" action="/register">
+            <label for="chk" aria-hidden="true">Sign up</label>
+            {% for msg in get_flashed_messages()%}
+              <p class="flash-msg">
+                 {{msg}}
+              </p>
+            {% endfor %}	
+
+            {{ Regform.hidden_tag() }}
+            {% for field in Regform if field.widget.input_type != 'hidden'%}     
+              {{field}}
+            {% endfor %}
+            <button>Sign up</button>
+          </form>
+        </div>
+  
+        <div class="login">
+          <form method="POST" action="/login">
+            <label for="chk" class="form-label" aria-hidden="true">Login</label>
+            {{ Logform.hidden_tag() }}
+            {% for field in Logform if field.widget.input_type != 'hidden'%}  
+              {{field}}
+            {% endfor %}
+            <button>Login</button>
+          </form>
+        </div>
+    </div>
+
+
+</body>
+</html>
