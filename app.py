@@ -48,6 +48,7 @@ def event_search():
         res = tm_search(zip=None,city=addr[0],state=addr[1],word=word)
 
 
+    # return res
     if res["page"]["totalElements"] < 1:
         return render_template('no-result.html', word=word,loc=loc)
     else:
@@ -80,7 +81,11 @@ def event_add_tm():
     
     event_name = request.form["event_name"]
     event_time = request.form["event_time_from"]
+    event_time_tba = request.form["event_time_tba"]
     event_date = request.form["event_date"]
+
+    if event_time_tba == "True":
+        event_time = "00:00:00"
     
     event = Events(name=event_name,date=event_date,time=event_time,userid=session['userid'])
 
@@ -98,7 +103,6 @@ def event_add_tm():
 def return_event():
 
     userid = session['userid']
-
     events = Events.query.filter_by(userid=userid)
     
     eventsarr = [e.serialize() for e in events]
