@@ -11,7 +11,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///events'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
-app.config['SECRET_KEY'] = "mokomichi1"
+app.config['SECRET_KEY'] = "mmichi1"
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 app.config['TESTING'] = False
 
@@ -48,7 +48,6 @@ def event_search():
         res = tm_search(zip=None,city=addr[0],state=addr[1],word=word)
 
 
-    # return res
     if res["page"]["totalElements"] < 1:
         return render_template('no-result.html', word=word,loc=loc)
     else:
@@ -57,7 +56,7 @@ def event_search():
     
     
 
-@app.route("/add_event", methods=["POST"])
+@app.route("/form_events", methods=["POST"])
 def event_add():
 
     data = request.get_json()
@@ -76,7 +75,7 @@ def event_add():
     return jsonify({'result': "event added"}), 200
 
 
-@app.route("/add_tm_event", methods=["POST"])
+@app.route("/events", methods=["POST"])
 def event_add_tm():
     
     event_name = request.form["event_name"]
@@ -99,7 +98,7 @@ def event_add_tm():
 
 
 
-@app.route("/return_events")
+@app.route("/events")
 def return_event():
 
     userid = session['userid']
@@ -110,7 +109,7 @@ def return_event():
 
     
 
-@app.route("/delete_event", methods=["DELETE"])
+@app.route("/events", methods=["DELETE"])
 def delete_event():
     date = request.args["date"]
     name =request.args["title"]
